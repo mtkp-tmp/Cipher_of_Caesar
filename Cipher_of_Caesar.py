@@ -1,6 +1,6 @@
 import random
 
-n = random.randint(1, 26)
+n = random.randint(1, 25)
 
 
 def cipher(s, d):  # s только латиница
