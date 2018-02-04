@@ -21,7 +21,7 @@ def cipher_kir(s, d):
             ord(i) + d > 1103) else (el, chr(ord(i) + d)) for el, i in s if i in rulit]
 
 
-# функция для сохранения небукв
+# функция для шифрования
 def cipher(s, d):
     # 1. разбиваем предложение на латицицу, кириллицу и небуквы
     notlit = list()
