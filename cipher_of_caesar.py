@@ -56,5 +56,3 @@ def cipher(s, d):
 lit = list('Hello, World! Привет, Мир!')
 n = -5
 cipher(cipher(lit, n), -n)
-
-# тестовый коммит
