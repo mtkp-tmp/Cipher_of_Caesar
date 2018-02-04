@@ -2,21 +2,20 @@
 # алгоритм поддерживает гибридный режим, то есть можно шифровать и лат, и кир буквы в одном предложении
 # знаки пунктуации, цифры и буквы ё и Ё не изменяются
 
-import random
-
-n = random.randint(1, 25)
 rulit = 'абвгдежзийклмнопрстуфхцчшщъыьэюяАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
 enlit = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 
 # s только латиница
 def cipher_lat(s, d):
+    d %= 26
     return [(el, chr(ord(i) + d - 26)) if ((ord(i) + d > 90) & (ord(i) + d < 117) & (ord(i) < 91)) | (
             ord(i) + d > 122) else (el, chr(ord(i) + d)) for el, i in s if i in enlit]
 
 
 # s только кириллица без букв ё, Ё
 def cipher_kir(s, d):
+    d %= 32
     return [(el, chr(ord(i) + d - 32)) if ((ord(i) + d > 1071) & (ord(i) + d < 1104) & (ord(i) < 1072)) | (
             ord(i) + d > 1103) else (el, chr(ord(i) + d)) for el, i in s if i in rulit]
 
@@ -48,10 +47,12 @@ def cipher(s, d):
         st += l
 
     # 4. вывод
-    print('Сдвиг:', n, '\n', ''.join(s), ' => ', st)
-
+    print('Сдвиг:', d, '\n', ''.join(s), ' => ', st)
+    return st
 
 #####################################################
-lit = list('Hello, Мир!')  # сюда вводить нужное предложение (не поддерживается ё и Ё)
-cipher(lit, n)
-
+# lit = list(input('Введите фразу: '))
+# n = int(input('Введите сдвиг: '))
+lit = list('Hello, World! Привет, Мир!')
+n = -5
+cipher(cipher(lit, n), -n)
