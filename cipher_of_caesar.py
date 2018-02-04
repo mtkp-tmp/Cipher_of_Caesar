@@ -1,23 +1,22 @@
-# you're code here
 # алгоритм поддерживает гибридный режим, то есть можно шифровать и лат, и кир буквы в одном предложении
-# знаки пунктуации, цифры и буквы ё и Ё не изменяются
+# знаки пунктуации и цифры не изменяются
 
-rulit = 'абвгдежзийклмнопрстуфхцчшщъыьэюяАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
+rulit = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
 enlit = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+rulitL = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+rulitU = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
+enlitL = 'abcdefghijklmnopqrstuvwxyz'
+enlitU = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 
 # s только латиница
 def cipher_lat(s, d):
-    d %= 26
-    return [(el, chr(ord(i) + d - 26)) if ((ord(i) + d > 90) & (ord(i) + d < 117) & (ord(i) < 91)) | (
-            ord(i) + d > 122) else (el, chr(ord(i) + d)) for el, i in s if i in enlit]
+    return [(el, enlitL[(enlitL.index(i) + d) % len(enlitL)]) if i in enlitL else (el, enlitU[(enlitU.index(i) + d) % len(enlitU)]) for el, i in s if i in enlit]
 
 
 # s только кириллица без букв ё, Ё
 def cipher_kir(s, d):
-    d %= 32
-    return [(el, chr(ord(i) + d - 32)) if ((ord(i) + d > 1071) & (ord(i) + d < 1104) & (ord(i) < 1072)) | (
-            ord(i) + d > 1103) else (el, chr(ord(i) + d)) for el, i in s if i in rulit]
+    return [(el, rulitL[(rulitL.index(i) + d) % len(rulitL)]) if i in rulitL else (el, rulitU[(rulitU.index(i) + d) % len(rulitU)]) for el, i in s if i in rulit]
 
 
 # функция для шифрования
@@ -54,5 +53,5 @@ def cipher(s, d):
 # lit = list(input('Введите фразу: '))
 # n = int(input('Введите сдвиг: '))
 lit = list('Hello, World! Привет, Мир!')
-n = -5
+n = 5
 cipher(cipher(lit, n), -n)
