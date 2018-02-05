@@ -5,3 +5,4 @@ print(*(chr(z + n) if 64 < z < 91 - n or 96 < z < 123 - n or
         chr(z - (32-n)) if 1071 - n < z < 1072 or 1103 - n < z < 1104 else
 
         chr(z) for z in map(ord, input('введите текст для шифрования '))), sep="")
+ 
