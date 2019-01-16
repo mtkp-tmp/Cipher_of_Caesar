@@ -1,0 +1,1 @@
+print((lambda alp, s, sh: ''.join(alp[(alp.index(c) + sh) % 118] for c in s))('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZабвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ',input('Введите текст для шифрования шифром Цезаря : '),int(input('Введите сдвиг для шифрования шифром Цезаря : '))))
